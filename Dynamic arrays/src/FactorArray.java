@@ -27,28 +27,15 @@ public class FactorArray<T> implements IArrays<T> {
 
     @Override
     public void add(T item) {
-        if (size == array.length) {
-            resize();
-        }
-
+        resize(size);
         array[size] = item;
         size++;
     }
 
     @Override
     public void add(T item, int index) {
-        if (size == array.length || index > size) {
-            Object[] tempArray = newArray();
-            System.arraycopy(array, 0, tempArray, 0, index);
-            tempArray[index] = item;
-            System.arraycopy(array, index, tempArray, index + 1, size - index);
-            array = tempArray;
-        } else {
-            System.arraycopy(array, 0, array, 0, index);
-            System.arraycopy(array, index, array, index + 1, size - index);
-            array[index] = item;
-        }
-        size++;
+        resize(index);
+        array[index] = item;
     }
 
     @Override
@@ -66,10 +53,16 @@ public class FactorArray<T> implements IArrays<T> {
         return (T) array[index];
     }
 
-    private void resize() {
-        Object[] tempArray = newArray();
-        System.arraycopy(array, 0, tempArray, 0, size);
-        array = tempArray;
+    private void resize(int index) {
+        if (size == array.length || index > size) {
+            Object[] tempArray = newArray();
+            System.arraycopy(array, 0, tempArray, 0, index);
+            System.arraycopy(array, index, tempArray, index + 1, size - index);
+            array = tempArray;
+        } else {
+            System.arraycopy(array, 0, array, 0, index);
+            System.arraycopy(array, index, array, index + 1, size - index);
+        }
     }
 
     private Object[] newArray() {
