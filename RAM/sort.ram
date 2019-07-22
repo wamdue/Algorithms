@@ -1,0 +1,46 @@
+<input> 3 3 2 1
+read 1
+read 2
+read 3 
+
+load 2
+sub 3
+jgtz more ; если r2 > r3
+jz equal ; r2 == r3
+
+iter:
+  load 1
+  sub =1
+  jz exit
+  store 1
+  jmp loop
+
+loop:
+  read 2
+  sub 3
+  jgtz more
+  jz equal
+  jmp iter
+ 
+more:
+  load 2
+  store 4
+  load 3
+  store 2
+  load 4
+  store 3
+  write 2
+  jmp iter
+
+equal:
+  write 2
+  jmp iter
+
+less:
+  write 2
+  jmp iter
+
+exit:
+  write 3
+  write 2
+  halt
