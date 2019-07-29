@@ -7,45 +7,53 @@ fn main() {
     let mut arr_160 = [0; 160];
     let mut arr_1000 = [0; 1000];
     let mut arr_10000 = [0; 10000];
+    let mut arr_100000 = [0; 100000];
+
     fill_arr(arr_20.as_mut());
     fill_arr(arr_160.as_mut());
     fill_arr(arr_1000.as_mut());
     fill_arr(arr_10000.as_mut());
+    fill_arr(arr_100000.as_mut());
 
     print_result_simple_sort(arr_20.as_mut());
     print_result_simple_sort(arr_160.as_mut());
     print_result_simple_sort(arr_1000.as_mut());
     print_result_simple_sort(arr_10000.as_mut());
-
+    print_result_simple_sort(arr_100000.as_mut());
 
     print_result_shell_sort(arr_20.as_mut(), 2);
     print_result_shell_sort(arr_160.as_mut(), 2);
     print_result_shell_sort(arr_1000.as_mut(), 2);
     print_result_shell_sort(arr_10000.as_mut(), 2);
+    print_result_shell_sort(arr_100000.as_mut(), 2);
 
     println!();
     print_result_shell_sort(arr_20.as_mut(), 3);
     print_result_shell_sort(arr_160.as_mut(), 3);
     print_result_shell_sort(arr_1000.as_mut(), 3);
     print_result_shell_sort(arr_10000.as_mut(), 3);
+    print_result_shell_sort(arr_100000.as_mut(), 3);
 
     println!();
     print_result_shell_sort(arr_20.as_mut(), 4);
     print_result_shell_sort(arr_160.as_mut(), 4);
     print_result_shell_sort(arr_1000.as_mut(), 4);
     print_result_shell_sort(arr_10000.as_mut(), 4);
+    print_result_shell_sort(arr_100000.as_mut(), 4);
 
     println!();
     print_result_shell_sort(arr_20.as_mut(), 5);
     print_result_shell_sort(arr_160.as_mut(), 5);
     print_result_shell_sort(arr_1000.as_mut(), 5);
     print_result_shell_sort(arr_10000.as_mut(), 5);
+    print_result_shell_sort(arr_100000.as_mut(), 5);
 
     println!();
     print_result_shell_sort(arr_20.as_mut(), 6);
     print_result_shell_sort(arr_160.as_mut(), 6);
     print_result_shell_sort(arr_1000.as_mut(), 6);
     print_result_shell_sort(arr_10000.as_mut(), 6);
+    print_result_shell_sort(arr_100000.as_mut(), 6);
 }
 
 fn print_result_simple_sort(arr: &mut [i32]) {
