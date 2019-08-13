@@ -1,7 +1,5 @@
 fn main() {
     let mut array = [4, 1, 8, 10, 16, 20, 11, 5, 2];
-    build_heap(array.as_mut());
-    println!("{:?}", array);
     sort(array.as_mut());
     println!("{:?}", array);
 }
@@ -15,8 +13,8 @@ fn build_heap(arr: &mut [i32]) {
 
 // построение узла рекурсией
 fn heapify(arr: &mut [i32], i: usize, heap_size: usize) {
-    let left = get_left(i);
-    let right = get_right(i);
+    let left = if i == 0 { get_left(i) + 1 } else { get_left(i) };
+    let right = if i == 0 { get_right(i) + 1 } else { get_right(i) };
     let mut largest;
     let x = arr[i];
     if left < heap_size && arr[left] > x {
@@ -30,9 +28,7 @@ fn heapify(arr: &mut [i32], i: usize, heap_size: usize) {
     }
 
     if i != largest {
-        let temp = arr[i];
-        arr[i] = arr[largest];
-        arr[largest] = temp;
+        arr.swap(i, largest);
         heapify(arr, largest, heap_size);
     }
 }
@@ -58,21 +54,18 @@ fn heapify_iter(arr: &mut [i32], i: usize, heap_size: usize) {
         }
 
         if index != largest {
-            let temp = arr[index];
-            arr[index] = arr[largest];
-            arr[largest] = temp;
+            arr.swap(index, largest);
             index = largest;
         } else { break; }
     }
 }
 
 fn sort(arr: &mut [i32]) {
-    let mut temp;
     let mut size = arr.len();
+    build_heap(arr);
     for i in (1..arr.len()).rev() {
-        temp = arr[i];
-        arr[i] = arr[0];
-        arr[0] = temp;
+        println!("Iter = {}, arr = {:?}", i, arr);
+        arr.swap(i, 0);
         size -= 1;
         heapify(arr, 0, size);
 //        heapify_iter(arr, 0, size);
@@ -85,4 +78,17 @@ fn get_left(index: usize) -> usize {
 
 fn get_right(index: usize) -> usize {
     index * 2 + 1
+}
+
+#[cfg(tests)]
+
+mod tests {
+    use super::*;
+
+    #[test]
+    fn sort_test() {
+        let mut arr = vec![50, 25, 1, 5, 3, 7, 15];
+        sort(arr.as_mut());
+        assert_eq!(vec![1, 3, 5, 7, 15, 25, 50], arr.as_mut());
+    }
 }
